@@ -1,4 +1,8 @@
-SKPipelineUtils
+Pandas Utils
 ===================
 
-Additions to the Scikit-Learn Pipeline that is helpful for me, and maybe someone else!
+To install:
+
+```
+pip install git+https://github.com/alexcapstick/PDUtils@main#egg=pdu
+```

@@ -7,4 +7,5 @@ name = "pdu"
 authors = [{name = "Alex Capstick", email = "alexander.capstick19@imperial.ac.uk"}]
 dynamic = ["version", "description"]
 dependencies = [
-    ]
+    "pandas"
+]
