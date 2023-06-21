@@ -3,5 +3,5 @@
 To install:
 
 ```
-pip install git+https://github.com/alexcapstick/pdu@main#egg=pdu
+pip install git+https://github.com/alexcapstick/PDUtils@main#egg=pdu
 ```
