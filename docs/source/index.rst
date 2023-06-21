@@ -1,7 +1,7 @@
-Welcome to PDU's documentation!
+Welcome to PDUtils' documentation!
 ==============================================
 
-**PDU**  is a Python library that adds to Pandas and provides functions that are helpful for me, and maybe someone else!
+**PDUtils**  is a Python library that adds to Pandas and provides functions that are helpful for me, and maybe someone else!
 
 Check out the :doc:`usage` section for further information, including
 how to :ref:`install` the project.
