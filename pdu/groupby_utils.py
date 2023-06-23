@@ -10,7 +10,7 @@ def groupby_freq(
 ) -> pd.DataFrame:
     """
     This function groups a dataframe by a list of columns and counts
-    the number of occurrences of each group.
+    the number of occurrences of each item in the counting column.
 
 
     Arguments
@@ -39,6 +39,9 @@ def groupby_freq(
 
 
     """
+
+    assert isinstance(df, pd.DataFrame), "df must be a pandas dataframe"
+
     groupby_cols = list(groupby_cols)
     groupby_cols.append(count_col)
 
