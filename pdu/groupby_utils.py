@@ -4,7 +4,7 @@ import typing as t
 
 def groupby_freq(
     df: pd.DataFrame,
-    groupby_cols: t.List[str],
+    groupby_cols: t.List[t.Union[str, pd.Grouper]],
     count_col: str,
     result_col: str = "freq",
 ) -> pd.DataFrame:

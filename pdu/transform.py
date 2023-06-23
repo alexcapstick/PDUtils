@@ -1,49 +1,48 @@
 import pandas as pd
 import typing as t
 
+
 def fill_from_first_occurence(
-        df:pd.DataFrame, 
-        subset:t.Union[t.List, str, None]=None, 
-        value:t.Any=0
-    ) -> pd.DataFrame:
-    '''
+    df: pd.DataFrame, subset: t.Union[t.List, str, None] = None, value: t.Any = 0
+) -> pd.DataFrame:
+    """
     This function fills each column in the subset
     in a dataframe with the value provided, from
     the first occurence
 
     This assumes that the dataframe is already
-    sorted in the order in which you want to fill.    
-    
-    
+    sorted in the order in which you want to fill.
+
+
     Arguments
     ---------
-    
-    - df: pd.DataFrame: 
+
+    - df: pd.DataFrame:
         The dataframe to be filled.
-    
+
     - subset: t.Union[t.List, str, None], optional:
-        The subset of columns to fill. 
+        The subset of columns to fill.
         Defaults to :code:`None`.
-    
+
     - value: t.Any, optional:
         The value to fill with.
         Defaults to :code:`0`.
-    
-    
+
+
     Raises
     ---------
-    
+
         ValueError: If df is not a pandas dataframe.
         ValueError: If subset is not a list of strings.
-    
+
     Returns
     --------
-    
+
     - out: pd.DataFrame:
         The dataframe with the filled columns.
-    
-    
-    '''
+
+
+    """
 
     assert isinstance(df, pd.DataFrame), "df must be a pandas dataframe"
 
@@ -65,3 +64,45 @@ def fill_from_first_occurence(
         df.loc[first_index:, col] = df_temp
 
     return df
+
+
+def explode_with_enumerate(
+    df: pd.DataFrame, col: str, enumerate_name: str
+) -> pd.DataFrame:
+    """
+    Explodes a column in a dataframe and enumerates
+    the values in the column. This allows you to
+    keep track of the original order of the values.
+
+
+    Arguments
+    ---------
+
+    - df: pd.DataFrame:
+        The dataframe to be exploded.
+
+    - col: str:
+        The column to explode.
+
+    - enumerate_name: str:
+        The name of the column to contain
+        the enumeration.
+
+
+    Returns
+    --------
+
+    - out: pd.DataFrame:
+        The dataframe with the exploded column.
+
+    """
+
+    assert isinstance(df, pd.DataFrame), "df must be a pandas dataframe"
+    assert isinstance(col, str), "col must be a string"
+    assert isinstance(enumerate_name, str), "enumerate_name must be a string"
+
+    cols = list(df.columns.drop(col))
+    df = df.copy()
+    return df.explode(col, ignore_index=False).assign(
+        **{enumerate_name: lambda df: (df.groupby(cols).transform("cumcount").add(1))}
+    )
