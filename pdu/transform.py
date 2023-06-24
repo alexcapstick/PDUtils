@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 import typing as t
 
 
@@ -67,7 +68,7 @@ def fill_from_first_occurence(
 
 
 def explode_with_enumerate(
-    df: pd.DataFrame, col: str, enumerate_name: str
+    df: pd.DataFrame, col: str, enumerate_name: str, start: int = 0
 ) -> pd.DataFrame:
     """
     Explodes a column in a dataframe and enumerates
@@ -88,6 +89,10 @@ def explode_with_enumerate(
         The name of the column to contain
         the enumeration.
 
+    - start: int, optional:
+        The starting value of the enumeration.
+        Defaults to :code:`0`.
+
 
     Returns
     --------
@@ -101,8 +106,10 @@ def explode_with_enumerate(
     assert isinstance(col, str), "col must be a string"
     assert isinstance(enumerate_name, str), "enumerate_name must be a string"
 
-    cols = list(df.columns.drop(col))
     df = df.copy()
-    return df.explode(col, ignore_index=False).assign(
-        **{enumerate_name: lambda df: (df.groupby(cols).transform("cumcount").add(1))}
-    )
+    return df.assign(
+        **{
+            enumerate_name: lambda df: df[col].apply(lambda x: np.arange(len(x)))
+            + start
+        }
+    ).explode([col, enumerate_name], ignore_index=False)
