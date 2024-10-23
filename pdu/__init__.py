@@ -13,11 +13,13 @@ from .levelling import (
     collapse_levels,
     lowercase_colnames,
 )
+from .load import load_nested_dict_to_pandas
 
 __all__ = [
     "groupby_freq",
     "fill_from_first_occurence",
     "collapse_levels",
     "lowercase_colnames",
+    "load_nested_dict_to_pandas",
 
 ]

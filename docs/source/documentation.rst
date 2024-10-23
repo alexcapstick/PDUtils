@@ -43,6 +43,25 @@ Here is the documentation for Levelling Pandas DataFrames.
 
 
 
+Load
+------------
+
+Here is the documentation for Load Pandas DataFrames.
+
+
+.. automodule:: pdu.load
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+
+
+
+
+
+
+
 
 Transform
 ------------
